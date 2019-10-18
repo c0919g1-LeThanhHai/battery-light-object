@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Battery(battery) {
+        this.battery = battery;
+        this.setBattery = function(Battery) {
+            this.battery = Battery;
+        };
+        this.getBattery = function() {
+            return this.battery;
+        };
+        this.decreaseEnergy = function() {
+            if(this.getBattery() > 0) {
+                this.setBattery(Number(this.getBattery()) - 1);
+            }
+        }
+    }
+
+    function Light(battery, status) {
+        this.battery = battery;
+        this.getBattery = function() {
+            return this.battery;
+        };
+        this.setBattery = function(Battery) {
+            this.battery = Battery;
+        };
+        this.getBatteryInfo = function() {
+            return this.battery.getBattery();
+        };
+        this.status = status;
+        this.getStatus = function() {
+            return this.status;
+        };
+        this.setStatus = function(Status) {
+            this.status = Status;
+        };
+        this.light = function() {
+            if(this.getStatus()) {
+                alert("light is on");
+            } else {
+                alert("light is off");
+            }
+        }
+        this.turnOn = function() {
+            this.setStatus(true);
+            this.getBattery().decreaseEnergy();
+        };
+        this.turnOff = function() {
+            this.setStatus(false);
+        }
+    }
+
+    let bat1 = new Battery(20);
+    let light1 = new Light(bat1, false);
+
+    document.write("Battery info:" + light1.getBatteryInfo() + "<br/>");
+    light1.light();
+
+    document.write("Turn on<br/>")
+    light1.turnOn();
+    light1.light();
+    document.write("Battery info:" + light1.getBatteryInfo() + "<br/>");
+
+    document.write("Turn off<br/>")
+    light1.turnOff();
+    light1.light();
+</script>
+</body>
+</html>
